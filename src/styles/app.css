@@ -832,9 +832,33 @@ table.data td.num {
 .app-header summary {
   white-space: nowrap;
 }
+/* 担当者名・役割はそれぞれ1行に収め、長い場合は省略（…）する */
+.header-user {
+  min-width: 0;
+  white-space: nowrap;
+}
+.header-user > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brand {
+  white-space: nowrap;
+  flex: none;
+}
 @media (max-width: 479px) {
+  .app-header-inner {
+    gap: var(--sp-2);
+  }
+  .brand {
+    font-size: 16px;
+    gap: var(--sp-1);
+  }
+  .app-header summary.btn {
+    padding: var(--sp-2) var(--sp-3);
+  }
   .header-user {
-    max-width: 7.5em;
+    flex: 0 1 auto;
     font-size: 12px;
   }
   .brand small {

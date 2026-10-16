@@ -131,11 +131,11 @@ export function IssueSummary({ d }: { d: IssueDetail }) {
         <h2 style={{ flex: 1 }}>{ISSUE_KIND_LABEL[i.kind]}</h2>
         <Status tone={issueTone(i.status)}>{issueLabel(i.status)}</Status>
       </div>
-      <div>
+      <div className="row" style={{ gap: 12 }}>
         <span className="rental-no" style={{ fontWeight: 700 }}>
           {d.rental.externalRentalIdOriginal}
         </span>
-        　{d.rental.customerLabelOriginal}
+        <span>{d.rental.customerLabelOriginal}</span>
       </div>
       <div className="small muted">
         {d.line.itemNameOriginal}（{d.line.itemCodeOriginal}）

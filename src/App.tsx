@@ -62,10 +62,9 @@ function Header() {
         <span className="header-spacer" />
         {session && (
           <>
-            <span className="header-user">
-              {session.displayName}
-              <br />
-              {ROLE_LABEL[session.role]}
+            <span className="header-user" title={`${session.displayName}／${ROLE_LABEL[session.role]}`}>
+              <span>{session.displayName}</span>
+              <span>{ROLE_LABEL[session.role]}</span>
             </span>
             <details style={{ position: 'relative' }}>
               <summary className="btn" aria-label="メニュー" style={{ listStyle: 'none' }}>
