@@ -1,0 +1,58 @@
+返却デスク（仮称）実装状況
+更新：2026-10-16　段階：Stage A（架空データの動作デモ）
+
+区分の意味
+  実装済（モック）：Stage A のメモリ内サーバーで動作し、テストで確認した。実保存・実通信ではない。
+  未実装          ：コードがない。
+  実機未確認      ：実 iPhone／Android で試していない。
+  外部設定待ち    ：Cloudflare・Supabase 等のアカウント設定が必要。
+
+■ 実装済（モック）
+  画面 S00～S12（S00 は架空担当者の選択、招待・パスワードは Stage B）
+  数量の不変条件：returned＝有効受付の合計、lost＝未取消紛失の合計、outstanding≧0、超過は全体拒否、破損は返却の内数
+  例外の状態遷移：open→waiting→review_pending→approved／needs_correction→closed、admin の再開
+  missing の自動作成・更新・全数返却で確認待ち（自動で請求なし・終了にしない）、判断対象数量の固定
+  damage：写真 ready 1枚以上で確認依頼・承認、写真省略は理由付きで差し戻し状態に留める
+  紛失処理（reviewer/admin）と反転（admin）、反転後の返却追加、外部訂正の再確認
+  返却記録の訂正（取消反転＋新記録を同一トランザクション）、貸出数の変更（admin）、取消（返却記録なしのみ）
+  operation_id による冪等（同ID同内容＝同結果、同ID別内容＝409）、version 一致による競合検出（409）
+  タイムアウト時の成否照会→再送、未到達時は保存済み表示にしない、写真の pending→ready と再送
+  セッション切れ（401）→再ログイン→同じIDで再提出、権限変更（403）→一覧へ
+  CSV取込：BOM有無、CP932拒否、5MB/2,000行、必須列・空白のみ・長さ・全角数字・負数・桁超過・未知拠点・日時・重複キー・同一貸出の整合、
+           1件でも誤りがあれば全体未確定、差分プレビュー（追加／変更／変更なし）、同じハッシュの再取込は既存結果、
+           検索キーだけ一致は警告して統合しない、前後空白は保持して提案、検証後の他者更新を検出
+  CSV出力：請求候補CSV（仕様の列）、案件CSV、履歴JSON（原文）、数式無害化＋RFC4180、出力版・回数・時刻の記録
+  事務引き渡し：出力≠受領、請求候補は外部番号必須、請求なしは理由必須、返却反映確認で貸出完了
+  データ返却ZIP（admin）：CSV・原文JSON・写真・manifest(sha256)・README。自組織のみ
+  メンバー：役割変更、停止時の再割当必須、最後の admin の停止・降格禁止、停止ユーザーの既存セッション拒否
+  設定：チェック項目（最大10、HTML不可）
+  監査：全更新で before/after を追記。クライアントAPIに削除手段なし
+  組織分離（モック）：全参照を所属組織で絞り込み、別組織IDは not_found
+  写真：ブラウザで JPEG 再エンコード（長辺1920px・2MiB以下、EXIF非継承）、サーバー側でシグネチャ・寸法・hash・容量検査、
+        60秒有効の読取、24時間超の pending 清掃関数
+  PWA：manifest、アプリシェルのみキャッシュする Service Worker、仮アイコン（SVG→192/512 PNG）、Cloudflare Pages 用 _redirects・_headers
+  UI：仕様のトークンを CSS 変数で実装、360～1280px、200%文字、未保存時の「編集を続ける／入力を破棄」、IME 確定前 Enter 無視、
+      固定下部操作（safe-area＋12px、高さ不足時は固定解除）、reduced-motion
+
+■ モック（Stage B で本物に置き換えが必要）
+  認証（架空担当者の選択）、DB（メモリ内）、RPC（TypeScript 関数）、Storage（メモリ内 Map）、通信（遅延と失敗の模擬）
+  権限・組織分離はメモリ内サーバーでの検査であり、RLS の証明ではない
+
+■ 未実装
+  Stage B 全般：Supabase Auth 招待・再設定、migrations（テーブル・複合FK・RLS・RPC）、Edge Functions、private Storage、
+                バックアップ・復元、レート制限、seed:local、test:db、データ返却の署名URL配信、退会・保持期限処理
+  持込ファイル（実CSV・実写真）の入口（Stage A では仕様により無効）
+  PC のキーボードのみでの全操作の自動試験（AC14 の一部。手動確認も未実施）
+
+■ 実機未確認
+  iPhone Safari／Android Chrome（撮影、HEIC 選択、IME、キーボード、戻る、ホーム画面追加）— AC13
+  E2E は Chromium（Playwright）で 390px モバイル相当と 1280px のみ
+
+■ 外部設定待ち
+  Cloudflare Pages の検証用プロジェクト（公開は明示依頼時のみ。docs/operations.txt）
+  Supabase プロジェクト（demo と pilot は別プロジェクト・別配信先）
+
+■ 受入条件の扱い
+  Stage A で確認（モック範囲）：AC01～05、08～10、12、14（表示幅・文字拡大のみ）→ docs/test_results.txt
+  Stage B 実環境ゲート（未実施・不合格扱いではなく未実施）：AC06、AC07、AC11、AC13、AC15
+  ※デモ上でも AC06/07/11 相当の検査は単体テストにあるが、RLS・実Storage の証明ではないため合格としない。

@@ -1,0 +1,4 @@
+source_system,rental_id,line_id,site_code,customer_label,due_at,item_code,item_name,unit,qty_out
+DEMO-RENT,R-301,1,HQ,サンプル体育協会（架空）,2026-10-23T10:00:00+09:00,CH-01,折りたたみ椅子,脚,50
+DEMO-RENT,R-301,2,HQ,サンプル体育協会（架空）,2026-10-23T10:00:00+09:00,TB-18,長机（1800）,台,１０
+DEMO-RENT,R-302,1,HQ,サンプル体育協会（架空）,2026-10-23T10:00:00+09:00,TN-33,テント（3×3）,張,2

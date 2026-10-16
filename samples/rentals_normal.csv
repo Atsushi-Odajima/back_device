@@ -1,0 +1,5 @@
+source_system,rental_id,line_id,site_code,customer_label,due_at,item_code,item_name,unit,qty_out
+DEMO-RENT,R-201,1,HQ,サンプル商工会（架空）,2026-10-20T10:00:00+09:00,CH-01,折りたたみ椅子,脚,40
+DEMO-RENT,R-201,2,HQ,サンプル商工会（架空）,2026-10-20T10:00:00+09:00,TB-18,長机（1800）,台,10
+DEMO-RENT,R-202,1,HQ,テスト結婚式場（架空）,2026-10-21T15:30:00+09:00,TN-33,テント（3×3）,張,3
+DEMO-RENT,R-202,2,HQ,テスト結婚式場（架空）,2026-10-21T15:30:00+09:00,WT-10,テント用ウェイト,個,12

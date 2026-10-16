@@ -1,0 +1,21 @@
+返却デスク（仮称）同梱・依存ライブラリのライセンス一覧
+
+■ 本リポジトリのコード・図形
+- ソース、自作SVGピクト、仮アイコン（public/icons）、架空サンプル写真（Pillowで描画した単純図形）、サンプルCSV：本プロジェクトの成果物（ライセンス条件は発注者が決定。未設定）。
+- 商用フォント・外部写真は同梱していない（OSのフォントを参照）。
+- assets/brand_board.png：企画パッケージ同梱の仮称ブランドボード（生成画像、検証用コンセプト）。正式ロゴではない。
+
+■ 実行時に配信へ含まれる依存（npm ls --omit=dev）
+@hookform/resolvers@5.9.1  MIT  git+https://github.com/react-hook-form/resolvers.git
+@standard-schema/utils@0.3.0  MIT  https://github.com/standard-schema/standard-schema
+@types/react@19.3.0  MIT  https://github.com/DefinitelyTyped/DefinitelyTyped.git
+csstype@3.2.3  MIT  https://github.com/frenic/csstype
+papaparse@5.7.0  MIT  git+https://github.com/mholt/PapaParse.git
+react@19.3.1  MIT  https://github.com/react/react.git
+react-dom@19.3.1  MIT  https://github.com/react/react.git
+react-hook-form@7.90.0  MIT  https://github.com/react-hook-form/react-hook-form
+scheduler@0.28.0  MIT  https://github.com/react/react.git
+zod@4.6.7  MIT  git+https://github.com/colinhacks/zod.git
+
+■ 開発時のみの依存：148パッケージ（ビルド・テスト用。配信物には含まれない）。一覧は package-lock.json を参照。
+各ライブラリのライセンス全文は node_modules/<name>/LICENSE を参照。

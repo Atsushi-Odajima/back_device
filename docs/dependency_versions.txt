@@ -1,0 +1,33 @@
+返却デスク（仮称）依存バージョン記録
+確認日：2026-10-16（npm registry の latest タグを確認し、正確な版を package.json／package-lock.json に固定）
+
+実行環境
+  Node.js        22.22.0（開発・試験で使用）。engines は ">=22.12.0"。
+                 公式スケジュール（github.com/nodejs/Release schedule.json）で確認：
+                 v22 メンテナンスLTS、終了 2027-04-30 → 対応内のため 22 系を維持。
+                 参考：v24 Active LTS（2026-10-20 からメンテナンス）、v26 は 2026-10-28 に LTS 予定。
+                 22 系終了前に現行LTSへ上げること。
+  npm            10.9.4
+
+実行時依存（dependencies）
+  react                 19.3.1
+  react-dom             19.3.1
+  react-hook-form       7.90.0
+  @hookform/resolvers   5.9.1
+  zod                   4.6.7
+  papaparse             5.7.0
+
+開発時依存（devDependencies）
+  vite                  8.3.4   （engines: ^20.19.0 || >=22.12.0）
+  @vitejs/plugin-react  6.1.2   （peer: vite ^8）
+  typescript            7.0.2   （strict。tsc -p tsconfig.json で型検査）
+  vitest                5.0.5   （peer: vite ^6||^7||^8）
+  jsdom                 30.1.3
+  @testing-library/react 16.3.3／@testing-library/jest-dom 7.0.1／@testing-library/user-event 14.6.8
+  @playwright/test      1.64.1
+  @types/react 19.3.0／@types/react-dom 19.3.0／@types/papaparse 5.5.2／@types/node 22.20.5
+
+Stage B で追加予定（未導入・未確認。導入時に公式安定版を確認して固定する）
+  supabase CLI（devDependencies に固定し npx が最新版を取りに行かないようにする）、@supabase/supabase-js
+
+CI は npm ci を使う（lockfile 固定）。

@@ -1,0 +1,2 @@
+source_system,rental_id,line_id,site_code,customer_label,due_at,item_code,item_name,unit,qty_out
+DEMO-RENT,R-801,1,HQ,シフトJISの例（架空）,2026-10-28T10:00:00+09:00,CH-01,折りたたみ椅子,脚,5

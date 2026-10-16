@@ -1,0 +1,16 @@
+{
+  "name": "返却デスク（仮称）",
+  "short_name": "返却デスク",
+  "description": "イベント什器・備品レンタルの返却確認（検証用）。業務保存・写真送信はオンライン必須です。",
+  "lang": "ja",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F0F1ED",
+  "theme_color": "#343B46",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

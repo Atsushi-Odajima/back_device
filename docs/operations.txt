@@ -1,0 +1,30 @@
+返却デスク（仮称）運用手順（Stage A 検証用／Stage B 準備）
+更新：2026-10-16
+
+1. Stage A を iPhone で確認する（Cloudflare Pages）
+  ※実際の公開はユーザーの明示依頼があるときだけ行う。料金・制限は作業時に Cloudflare 公式で再確認する。
+  1) ユーザー所有の Cloudflare アカウントで、検証用の Pages プロジェクトを作る（本番・pilot とは別）。
+  2) Git 連携の場合：ビルドコマンド「npm ci && npm run build」、出力ディレクトリ「dist」、環境変数 VITE_APP_MODE=demo、NODE_VERSION=22。
+     手動の場合：npm run build の後、dist を直接アップロード（wrangler pages deploy dist 等）。
+  3) SPA の直接URLは public/_redirects（/* → /index.html 200）で index.html に戻る。セキュリティヘッダは public/_headers。
+  4) 発行された https://～.pages.dev を iPhone Safari で開く → 共有 → ホーム画面に追加 → 起動を確認。
+  5) LAN の http://PCのIP:5173 はレイアウト確認のみ。PWA・カメラ等の安全なコンテキストの合格証拠にしない。
+
+2. PWA の範囲
+  - Service Worker（public/sw.js）はアプリシェル（HTML・ハッシュ付き JS/CSS・アイコン）だけをキャッシュする。
+  - 業務API・写真・署名URL・CSV出力はキャッシュしない。完全オフラインではない。通知・バックグラウンド同期は実装しない。
+  - デモはメモリ内データのため、再読込・画面を閉じると初期化される。
+
+3. Stage B（未実装）で用意するもの
+  - 別 URL・pilot モード・認証必須。Supabase Auth の許可 Redirect URL と APP_ORIGIN を検証先に限定。
+  - サーバー専用の秘密（SUPABASE_SERVICE_ROLE_KEY、BACKUP_ENCRYPTION_KEY 等）は Edge Functions／CI secret。VITE_ を付けない。
+  - 初回 admin はローカル管理スクリプトで一度だけ作る（公開 HTTP にしない）。
+  - ローカル：npx supabase start → npx supabase db reset → npm run seed:local（ローカルURL以外では中止）→ npm run test:db。
+    db reset を本番に向けるコマンドは手順に入れない。前提：Docker Desktop（利用条件確認）＋WSL2。
+  - 実データ開始の条件：DB と写真（Storage は DB バックアップに含まれない）の両方のバックアップと、隔離環境への復元を一度成功させる。
+    日次暗号化・35日世代・別権限の保管先。目標 RPO 24h／RTO 2営業日（測定するまで SLA を保証しない）。
+  - 障害時は紙の代替票へ切替、復旧後に operation_id／貸出番号で重複確認して登録。
+  - 保持12か月基準、期限前通知と書出し確認。終了日から書込停止、30日の受領窓口、一次データ削除、バックアップ最大35日で失効。削除台帳を保持。
+
+4. 試験端末の記録
+  実機試験は未実施。試した OS・ブラウザ・端末を docs/test_results.txt に一覧で追記し、未試験端末は保証しない。

@@ -1,0 +1,66 @@
+/* UIトークン（仕様５）。値は仕様の数値をそのまま使う。 */
+:root {
+  --background: #f0f1ed;
+  --surface: #fcfcf6;
+  --ink: #292d34;
+  --muted: #616770;
+  --border: #bac0c6;
+  --primary: #343b46;
+  --primary-text: #ffffff;
+  --primary-hover: #282f39;
+  --primary-active: #1d242d;
+  --accent: #e5eb83;
+  --accent-text: #292d34;
+  --row-hover: #e6eadf;
+  --success: #2c6147;
+  --success-bg: #e1eee3;
+  --warning: #795100;
+  --warning-bg: #fff0be;
+  --error: #a53337;
+  --error-bg: #fbe8e7;
+  --disabled-bg: #d9ded5;
+  --disabled-text: #59635d;
+  --focus: #795100;
+
+  --font-body: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, system-ui, sans-serif;
+  --font-num: 'Consolas', 'Menlo', monospace;
+  --font-latin-display: Georgia, serif;
+
+  --fs-display: 28px;
+  --fs-title: 22px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-qty: 32px;
+
+  --lh-body: 1.6;
+  --lh-heading: 1.3;
+  --lh-num: 1.1;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  --gutter: 16px;
+  --max-width: 1120px;
+  --form-width: 640px;
+
+  --radius: 8px;
+  --radius-input: 6px;
+  --radius-photo: 4px;
+  --shadow-modal: 0 8px 28px rgba(41, 45, 52, 0.14);
+
+  --control-h: 48px;
+  --control-h-main: 52px;
+  --icon: 22px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}

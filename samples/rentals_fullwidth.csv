@@ -1,0 +1,3 @@
+﻿source_system,rental_id,line_id,site_code,customer_label,due_at,item_code,item_name,unit,qty_out
+DEMO-RENT,Ｒ－１０１,1,HQ,株式会社ＡＢＣ,2026-10-22T09:00:00+09:00,Ｒ－００１,ステージ台（全角コード）,台,4
+DEMO-RENT,Ｒ－１０１,2,HQ,株式会社ＡＢＣ,2026-10-22T09:00:00+09:00,ＣＨ－０１,折りたたみ椅子,脚,24

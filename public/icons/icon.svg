@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 仮アイコン：返却矢印＋確認枠（自作。正式ロゴではない） -->
+  <rect width="512" height="512" fill="#343B46"/>
+  <path d="M220 156H128v232h232v-92" fill="none" stroke="#F0F1ED" stroke-width="44" stroke-linecap="square"/>
+  <path d="M352 330c56-40 66-110 30-150-24-26-60-36-104-34" fill="none" stroke="#E5EB83" stroke-width="40" stroke-linecap="round"/>
+  <path d="M316 92l-56 54 56 54" fill="none" stroke="#E5EB83" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
