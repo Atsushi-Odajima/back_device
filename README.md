@@ -10,9 +10,11 @@
 
 何ができて何が未実装かは [docs/implementation_status.txt](docs/implementation_status.txt) を参照してください。
 
-## 起動（Windows 11 PowerShell／macOS／Linux 共通）
+## 起動（Windows PowerShell）
 
-前提：Node.js 22.12 以上（22系はメンテナンスLTS、2027-04-30 まで）、Git。
+前提：Node.js 22.12以上、Git。依存バージョンは [package.json](package.json) とlockfileを参照してください。
+
+macOS / Linuxでは環境ファイルのコピーを `cp .env.example .env.local` に読み替えます。
 
 ```powershell
 npm ci
@@ -50,3 +52,12 @@ public            manifest・Service Worker（アプリシェルのみ）・仮�
 docs              実装状況・運用・導入・依存版・試験結果
 assets            仮称ブランドボード（デザインイメージ。数値・機能は仕様書を正とする）
 ```
+
+## 実装を読む
+
+- [src/domain](src/domain)：数量・状態遷移・CSV検証・出力のロジック。
+- [src/data](src/data)：Repository境界と、通信失敗・競合を模擬するメモリ内データ層。
+- [tests](tests)：ロジック・画面フローの検証。既存の試験結果は [docs](docs) を参照してください。
+- [LICENSES.txt](LICENSES.txt)：自作サンプルと第三者依存物の表記。
+
+制作・管理：**Atsushi Odajima**。実装・資料作成にはAI支援を利用しています。
